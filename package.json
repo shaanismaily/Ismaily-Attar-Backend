@@ -10,8 +10,10 @@
   "author": "Muhammad Shaan",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.1.1",
     "nodemon": "^3.1.14",
     "prettier": "^3.9.5",
@@ -19,9 +21,12 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.7.4"
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.7.4",
+    "mongoose-aggregate-paginate-v2": "^1.1.4"
   }
 }
