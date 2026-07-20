@@ -1,8 +1,19 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt, { type SignOptions } from "jsonwebtoken";
 
-const userSchema = new Schema({
+interface IUser {
+  fullName: string;
+  phone?: string;
+  email: string;
+  password: string;
+  role: "admin" | "user";
+  refreshToken?: string
+}
+
+interface UserModel extends Model<IUser, {}, IUserMethods> {}
+
+const userSchema = new Schema<IUser, Model<IUser>, IUserMethods>({
     fullName: {
         type: String,
         required: true,
@@ -35,6 +46,14 @@ const userSchema = new Schema({
         type: String,
     }
 }, {timestamps: true})
+
+interface IUserMethods {
+  isPasswordCorrect(password: string): Promise<boolean>;
+
+  generateAccessToken(): string;
+
+  generateRefreshToken(): string;
+}
 
 userSchema.pre("save", async function() {
     if (!this.isModified("password")) return;
@@ -95,4 +114,4 @@ userSchema.methods.generateRefreshToken = function (): string {
   );
 };
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model<IUser, UserModel>("User", userSchema);
