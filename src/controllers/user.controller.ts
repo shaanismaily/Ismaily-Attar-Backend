@@ -108,7 +108,7 @@ const loginUser = asyncHandler( async(req, res) => {
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(new ApiResponse(
-        200, {loggedInUser, accessToken, refreshToken}, "User logged in successfully"
+        200, { user: loggedInUser }, "User logged in successfully"
     ))
 })
 
@@ -166,7 +166,7 @@ const refreshAccessToken = asyncHandler( async(req, res) => {
         .json(
             new ApiResponse(
                 200,
-                {refreshToken, accessToken},
+                null,
                 "Access token refreshed"
             )
         )
@@ -229,11 +229,7 @@ const updateAccountDetails = asyncHandler( async(req, res) => {
 
     const user = await User.findByIdAndUpdate(
         req.user!._id,
-        {
-            $set: {
-                updateData
-            }
-        },
+        updateData,
         {new: true}
     ).select("-password")
 

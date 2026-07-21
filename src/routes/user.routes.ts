@@ -12,7 +12,7 @@ import {
 
 const router = Router()
 
-router.route("/signup").post(registerUser)
+router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
 
 // secured routes
