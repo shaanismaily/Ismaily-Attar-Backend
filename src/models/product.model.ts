@@ -5,6 +5,7 @@ interface IProduct {
     slug: string;
     description: string;
     images: string[];
+    imagesPublicId: string[],
     category: Types.ObjectId;
 }
 
@@ -34,6 +35,7 @@ const productSchema = new Schema<IProduct, Model<IProduct>>( {
             message: "At least one image is required"
         }
     },
+    imagesPublicId: [String],
     category: {
         type: Schema.Types.ObjectId,
         ref: "Category",
