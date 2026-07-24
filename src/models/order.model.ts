@@ -12,6 +12,11 @@ interface IOrder {
 interface IOrderItem {
     product: Types.ObjectId;
     variant: Types.ObjectId;
+
+    productName: string;
+    volume: string;
+    price: number;
+
     quantity: number;
 }
 
